@@ -552,7 +552,10 @@ public class GerritServer implements Describable<GerritServer>, Action {
             if (gerritConnection == null) {
                 logger.debug("Starting Gerrit connection...");
                 gerritConnection = new GerritConnection(name, config);
-                gerritEventManager.setIgnoreEMail(name, config.getGerritEMail());
+                //if (!config.wantAllEvents()) {
+                if (false) {
+                    gerritEventManager.setIgnoreEMail(name, config.getGerritEMail());
+                }
                 gerritConnection.setHandler(gerritEventManager);
                 gerritConnection.addListener(gerritConnectionListener);
                 gerritConnection.addListener(projectListUpdater);
